@@ -49,7 +49,7 @@ firewall-cmd --zone=work --list-services                #查看指定区域中�
 
 ##### 4.添加及删除某个端口并且查看默认区域或者指定区域加载了哪些端口
 
-<span style="color:red">irewall-cmd --add-port=445/tcp</span>                     #在默认区域下添加445/tcp端口
+<span style="color:red">firewall-cmd --add-port=445/tcp</span>                     #在默认区域下添加445/tcp端口
 firewall-cmd --remove-port=445/tcp                  #在默认区域下添加445/tcp端口
 <span style="color:red">firewall-cmd --list-ports </span>                          #查看默认区域加载的端口
 firewall-cmd --zone=work --add-port=445/tcp         #在指定区域下添加445/tcp端口
