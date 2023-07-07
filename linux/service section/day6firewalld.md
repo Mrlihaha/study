@@ -61,6 +61,8 @@ firewall-cmd --zone=work --add-port=3000-4000/tcp   #在指定区域中批量添
 
 ##### <span style="color:red">5.禁止某ip或网段进行访问（黑名单）</span>
 
+ 以下要加入指定组才会生效
+
 firewall-cmd --zone=block --add-source=192.168.10.62            #禁止某个IP访问
 firewall-cmd --zone=block --add-source=192.168.10.0/24          #禁止某个网段访问
 firewall-cmd --zone=drop  --add-source=192.168.10.62            #禁止某个IP访问，并且丢弃所有数据包
@@ -109,7 +111,7 @@ firewall-cmd --add-rich-rule='rule family="ipv4" source address=192.168.10.62 po
 #允许某条IP通过防火墙访问本机
 firewall-cmd --add-rich-rule='rule family="ipv4" source address="192.168.10.62" accept'
 #允许某个IP通过（3000-4000）端口访问到本机
-firewall-cmd --add-rich-rule='rule family="ipv4" source address="192.168.10.62" destination address="127.0.0.1" port port="3000-4000" protocol="tcp" accept'
+firewall-cmd --add-rich-rule='rule family="ipv4" source address="192.168.10.62" destination address="you are ipaddr" port port="3000-4000" protocol="tcp" accept'
 ```
 
 #### 4.ipset
@@ -123,6 +125,8 @@ firewall-cmd --add-rich-rule='rule family="ipv4" source address="192.168.10.62" 
 查看ipset都支持哪些类型，新建一个set并且指定类型。
 
 创建的set在`/etc/firewalld/ipsets`目录生成了一个XML文件，这是对应set存储文件。
+
+<span style="color:red">先运行以下命令创建ipset文件</span>
 
 ```
 firewall-cmd --get-ipset-types                             #查看ipset支持类型
@@ -143,7 +147,7 @@ firewall-cmd --permanent --ipset=test1 --add-entry=192.168.10.10-100      #在se
 
 打印一个set的路径以及set的内容
 
-```
+```ABAP
 firewall-cmd --permanent --path-ipset=test1                     #打印set的路径
 firewall-cmd --permanent --info-ipset=test1                     #打印set的内容
 firewall-cmd --permanent --ipset=test1 --get-entries            #打印set中所有的entry
